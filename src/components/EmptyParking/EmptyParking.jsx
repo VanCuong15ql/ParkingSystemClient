@@ -72,7 +72,7 @@ const EmptyParking = () => {
             window.FuiToast.error('Error deleting parking space!');
         }
     });
-    const handleSubmit = (e,formData) => {
+    const handleSubmit = (e, formData) => {
         e.preventDefault();
         const newParking = {
             name: formData.name,
@@ -130,9 +130,10 @@ const EmptyParking = () => {
         console.log("response parking spaces", response.data);
         return response.data;
     }
-    const { data: dbParkingSpaces=[], isLoading, error } = useQuery({
+    const { data: dbParkingSpaces = [], isLoading, error } = useQuery({
         queryKey: ['parkingSpaces'],
         queryFn: fetchParkingSpaces,
+        refetchInterval:5000,
         onSuccess: (data) => {
             console.log('Fetched parking spaces:', dbParkingSpaces);
         },
@@ -177,9 +178,9 @@ const EmptyParking = () => {
     });
     return (
         <div className='container' style={{ marginLeft: "10px", display: "flex", flexDirection: "row" }}>
-            <div ref={drop} id="map" style={{ position: "relative", width: "800px", height: "500px" }} >
-                <img src="/parking-map.jpg" alt="parking map" style={{ width: "100%", height: "100%", border: "0.3px solid rgba(0,0,0,1)" }} ></img>
-                {dbParkingSpaces.filter(space => space.locationx!==0 && space.locationy!==0)?.map((space) => (
+            <div ref={drop} style={{ position: "relative", width: "809px", height: "500px", overflow: "auto" }} >
+                <img id='map' src="/parking-map.jpg" alt="parking map" style={{ width: "971px", height: "600px" }} ></img>
+                {dbParkingSpaces.filter(space => space.locationx !== 0 && space.locationy !== 0)?.map((space) => (
                     <div
                         key={space._id}
                         style={{
@@ -239,7 +240,7 @@ const EmptyParking = () => {
                     <option value="bike">Xe đạp</option>
                     <option value="motor">Xe máy</option>
                 </select>
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxHeight: "400px",overflowY:"auto", marginTop: "10px", padding: "10px", backgroundColor: "white", borderRadius: "5px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxHeight: "400px", overflowY: "auto", marginTop: "10px", padding: "10px", backgroundColor: "white", borderRadius: "5px" }}>
                     {/* show parking space */}
                     {filteredSpaces.map((space, index) => (
                         <div key={index}>
@@ -259,7 +260,7 @@ const EmptyParking = () => {
                     handleCancel={handleCancle}
                 />
             )}
-            {editingParking&&(
+            {editingParking && (
                 <ParkingForm
                     title={"Edit Parking Space"}
                     initialData={editFormData}

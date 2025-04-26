@@ -32,8 +32,8 @@ body {
   position: fixed;
   width: 300px;
   height: 100%;
-  background: var(--blue);
-  border-left: 10px solid var(--blue);
+  background: var(--black1);
+  border-left: 10px solid var(--black1);
   transition: 0.5s;
   overflow: hidden;
 }
@@ -74,7 +74,7 @@ body {
 }
 .navigation ul li:hover a,
 .navigation ul li.hovered a {
-  color: var(--blue);
+  color: var(--black1);
 }
 .navigation ul li a .icon {
   display: flex;

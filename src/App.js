@@ -10,6 +10,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import './assets/css/style.css';
 import './assets/css/mystyle.css';
 import './components/Auth/login.css';
+import './components/Form/ParkingForm.css'
+import './components/Management/management.css';
 import EmptyParking from './components/EmptyParking/EmptyParking';
 import Management from './components/Management/Management';
 import Password from './components/Password/Password';
@@ -21,6 +23,7 @@ import { DndProvider } from 'react-dnd';
 import DndWrapper from './components/DndWraper';
 import PrivateRoute from './components/Auth/PrivateRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 
 const queryClient = new QueryClient();
 const AppRoutes = ({ navActive, handleToggle }) => {
