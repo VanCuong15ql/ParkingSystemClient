@@ -36,7 +36,7 @@ const LoginForm = () => {
                 localStorage.setItem('isAuth',true);
                 setTimeout(() => {
                     navigate('/dashboard');
-                }, 2000);
+                }, 0);
             }
 
             const data = await response.json();

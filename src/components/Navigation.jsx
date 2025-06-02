@@ -8,6 +8,7 @@ import { IoSettings } from "react-icons/io5";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaSquareParking } from "react-icons/fa6";
+import { FaDoorOpen } from "react-icons/fa";
 
 const Navigation = ({ active }) => {
     return (
@@ -42,7 +43,15 @@ const Navigation = ({ active }) => {
                         <span className="icon">
                             <FaAddressCard/>
                         </span>
-                        <span className="title">Management</span>
+                        <span className="title">ManagementUsers</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/management-access">
+                        <span className="icon">
+                            <FaDoorOpen/>
+                        </span>
+                        <span className="title">ManagementAccess</span>
                     </Link>
                 </li>
                 <li>

@@ -6,62 +6,103 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { FaUserCircle } from "react-icons/fa";
 import UserParkingForm from '../Form/UserParkingForm';
 import axios from 'axios';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 const Management = () => {
     const [showForm, setShowForm] = React.useState(false);
     const [showFormEdit, setShowFormEdit] = useState(false);
-    const [userParkings, setUserParkings] = React.useState([]);
     const [selectedUserParking, setSelectedUserParking] = useState(null);
     const urlServer = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
     const [userId, setUserId] = React.useState(localStorage.getItem('userId'));
+    const queryClient = useQueryClient();
 
-    useEffect(() => {
-        fetchUserParkings();
-    },[]);
-    const handleCancel = () => {
-        setShowForm(false);
-        setShowFormEdit(false);
-    }
-    const handleSubmit = async(formData)=>{
-        try{
-            const reponse = await axios.post(`${urlServer}/user-parking`, formData);
-            console.log('user added successfully:', reponse.data);
+    const { data: userParkings=[],isLoading} = useQuery({
+        queryKey: ['userParkings', userId],
+        queryFn: async () => {
+            const response = await axios.get(`${urlServer}/user-parking`, {
+                params: {
+                    userId: userId
+                }
+            });
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+    })
+
+    // mutation to add user parking
+    const addUserMutation = useMutation({
+        mutationFn: async (formData) => {
+            const response = await axios.post(`${urlServer}/user-parking`, formData);
+            return response.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['userParkings', userId]
+            });
             setShowForm(false);
             window.FuiToast.success('Add user successfully!');
-            fetchUserParkings();
-
-        }catch (error) {
+        },
+        onError: (error) => {
             console.error('Error adding user:', error);
             if(error.response.status === 400) {
                 window.FuiToast.error('User parking with this UID or email already exists');
             }
         }
-    }
-    const handleDelete = async (id)=>{
-        try{
-            const response = await axios.delete(`${urlServer}/user-parking/${id}`);
-            console.log('User deleted successfully:', response.data);
-            setShowFormEdit(false);
-            fetchUserParkings();
-            window.FuiToast.success('Delete user successfully!');
-        }catch (error) {
-            console.error('Error deleting user:', error);
-            window.FuiToast.error('Error deleting user');
-        }
-    }
-    
-    const handleSubmitEdit = async (formData) => {
-        try {
+    })
+
+    // mutation to edit user parking
+    const editUserMutation = useMutation({
+        mutationFn: async (formData) => {
             const response = await axios.put(`${urlServer}/user-parking/${formData._id}`, formData);
-            console.log('User updated successfully:', response.data);
+            return response.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['userParkings', userId]
+            });
             setShowFormEdit(false);
-            fetchUserParkings();
             window.FuiToast.success('Update user successfully!');
-        } catch (error) {
+        },
+        onError: (error) => {
             console.error('Error updating user:', error);
             if(error.response.status === 400) {
                 window.FuiToast.error('User parking with this UID or email already exists');
             }
         }
+    })
+    // mutation to delete user parking
+    const deleteUserMutation = useMutation({
+        mutationFn: async (id) => {
+            const response = await axios.delete(`${urlServer}/user-parking/${id}`);
+            return response.data;
+        },
+
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['userParkings', userId]
+            });
+            setShowFormEdit(false);
+            window.FuiToast.success('Delete user successfully!');
+        },
+        onError: (error) => {
+            console.error('Error deleting user:', error);
+            window.FuiToast.error('Error deleting user');
+        }
+    })
+
+    const handleCancel = () => {
+        setShowForm(false);
+        setShowFormEdit(false);
+    }
+    const handleSubmit = async(formData)=>{
+        addUserMutation.mutate(formData);
+    }
+    const handleDelete = async (id)=>{
+        
+        deleteUserMutation.mutate(id);
+    }
+    
+    const handleSubmitEdit = async (formData) => {
+        editUserMutation.mutate(formData);
     }
 
     const handleEdit =  (user) => {
@@ -70,14 +111,7 @@ const Management = () => {
         console.log(selectedUserParking);
     }
 
-    const fetchUserParkings = async () => {
-            try {
-                const response = await axios.get(`${urlServer}/user-parking`);
-                setUserParkings(response.data);
-            } catch (error) {
-                console.error('Error fetching user parkings:', error);
-            }
-        }
+
     return (
         <div className="management-container">
             <div className='management-header'>

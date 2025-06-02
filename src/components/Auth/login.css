@@ -1,12 +1,12 @@
 body {
     font-family: 'Quicksand', sans-serif;
-    background-image: url(https://raw.githubusercontent.com/CiurescuP/LogIn-Form/main/bg.jpg);
+    background-image: url(https://img.freepik.com/premium-photo/parking-management-system-green-background-solid-color-background-4k-ultra-hd_964851-139748.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
 .auth-form {
-    height: 590px;
-    width: 450px;
+    width: 450px; 
     background-color: rgba(255, 255, 255, 0.13);
     position: absolute;
     transform: translate(-50%, -50%);

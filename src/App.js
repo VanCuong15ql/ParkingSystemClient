@@ -19,6 +19,7 @@ import Setting from './components/Setting/Setting';
 import Help from './components/Help/Help';
 import LoginForm from './components/Auth/Login';
 import RegisterForm from './components/Auth/Register';
+import ManagementAccess from './components/ManagementAccess/ManagementAcess';
 import { DndProvider } from 'react-dnd';
 import DndWrapper from './components/DndWraper';
 import PrivateRoute from './components/Auth/PrivateRoute';
@@ -58,6 +59,7 @@ const App = () => {
                             <Route path="dashboard" element={<Dashboard />} />
                             <Route path="empty-parking" element={<EmptyParking />} />
                             <Route path="management" element={<Management />} />
+                            <Route path="management-access" element={<ManagementAccess />} />
                             <Route path="password" element={<Password />} />
                             <Route path="setting" element={<Setting />} />
                             <Route path="help" element={<Help />} />

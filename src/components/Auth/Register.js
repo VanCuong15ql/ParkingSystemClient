@@ -1,7 +1,11 @@
 import React from 'react';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaFacebookF } from "react-icons/fa";
+import { CiTwitter } from "react-icons/ci";
+import { FaInstagram } from "react-icons/fa";
 import axios from 'axios';
+
 const LoginForm = () => {
     const serverUrl = process.env.REACT_APP_SERVER_URL;
     const[isLoading,setIsLoading]= React.useState(false);
@@ -65,9 +69,9 @@ const LoginForm = () => {
             <button type="submit">Signup</button>
             <p className="social-text">Login with a social media account</p>
             <div className="social-icons">
-                <button className="social-icon fb"><i className="fa-brands fa-facebook"></i></button>
-                <button className="social-icon tw"><i className="fa-brands fa-twitter"></i></button>
-                <button className="social-icon in"><i className="fa-brands fa-instagram"></i></button>
+                <button className="social-icon fb"><FaFacebookF /></button>
+                <button className="social-icon tw"><CiTwitter /></button>
+                <button className="social-icon in"><FaInstagram /></button>
             </div>
             {isLoading&&
             <div>

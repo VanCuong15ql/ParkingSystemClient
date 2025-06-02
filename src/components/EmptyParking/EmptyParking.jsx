@@ -133,7 +133,7 @@ const EmptyParking = () => {
     const { data: dbParkingSpaces = [], isLoading, error } = useQuery({
         queryKey: ['parkingSpaces'],
         queryFn: fetchParkingSpaces,
-        refetchInterval:5000,
+        refetchInterval:2000,
         onSuccess: (data) => {
             console.log('Fetched parking spaces:', dbParkingSpaces);
         },
@@ -227,12 +227,9 @@ const EmptyParking = () => {
                             <ParkingIcon component={FaMotorcycle} />
                         </div>
                     </div>
-                    <div style={{ padding: "10px", marginTop: "10px", backgroundColor: "blue", color: "white" }}>
-                        <button onClick={() => setShowAddForm(true)}><IoAddSharp /></button>
-                    </div>
+        
                 </div>
-                <span>Lọc theo</span>
-                <select value={filter} onChange={(e) => setFilter(e.target.value)} style={{ marginTop: "10px", padding: "5px", borderRadius: "5px" }}>
+                <select value={filter} onChange={(e) => setFilter(e.target.value)} style={{ marginTop: "10px", padding: "5px", borderRadius: "5px", height: "35px", width: "100px" }}>
                     <option value="all">Tất cả</option>
                     <option value="set">Đã đặt</option>
                     <option value="unset">Chưa đặt</option>
@@ -240,6 +237,12 @@ const EmptyParking = () => {
                     <option value="bike">Xe đạp</option>
                     <option value="motor">Xe máy</option>
                 </select>
+                <button className='button-form'
+                style={{
+                    backgroundColor: "black",
+                    color: "white",
+                    marginLeft: "25px",
+                }} onClick={() => setShowAddForm(true)}>AddParking</button>
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxHeight: "400px", overflowY: "auto", marginTop: "10px", padding: "10px", backgroundColor: "white", borderRadius: "5px" }}>
                     {/* show parking space */}
                     {filteredSpaces.map((space, index) => (
