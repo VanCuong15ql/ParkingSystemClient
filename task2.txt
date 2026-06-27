@@ -1,0 +1,12 @@
+Đây là api trên server xử lý ảnh:
+# API NHẬN ẢNH - ĐẨY VÀO HÀNG ĐỢI
+@app.post("/api/v1/predict")
+async def predict_plate(file: UploadFile = File(...)):
+    try:
+        # Bước A: Đọc file ảnh gửi lên từ Client
+        file_bytes = await file.read()
+
+        # Bước B: Chuyển đổi Bytes thành ma trận ảnh OpenCV để kiểm tra tính hợp lệ
+        nparr = np.frombuffer(file_bytes, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+Hãy chỉnh sử cho phù hợp (đang gặp lỗi 400 bad request)

@@ -1,0 +1,279 @@
+.parking-map-container {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+}
+
+.btn-primary:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.drawing-controls {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+.zone-name-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.zone-name-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+}
+
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-edit,
+.btn-delete {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-secondary {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #0b7dda;
+}
+
+.btn-success {
+    background: #4CAF50;
+    color: white;
+    flex: 1;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #45a049;
+}
+
+.btn-danger {
+    background: #f44336;
+    color: white;
+    flex: 1;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #da190b;
+}
+
+.btn-edit {
+    background: #2196F3;
+    color: white;
+    flex: 1;
+}
+
+.btn-edit:hover:not(:disabled) {
+    background: #0b7dda;
+}
+
+.btn-delete {
+    background: #f44336;
+    color: white;
+    flex: 1;
+}
+
+.btn-delete:hover:not(:disabled) {
+    background: #da190b;
+}
+
+.btn-secondary:disabled,
+.btn-success:disabled,
+.btn-danger:disabled,
+.btn-edit:disabled,
+.btn-delete:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.map-editor-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.map-container {
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.map-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+}
+
+.zone-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.zone-group,
+.current-zone-group {
+    user-select: none;
+}
+
+.zone-polygon {
+    stroke-linejoin: round;
+    opacity: 0.8;
+}
+
+.zone-label {
+    user-select: none;
+}
+
+.zones-list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.zones-list h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 18px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.no-zones {
+    text-align: center;
+    color: #999;
+    padding: 20px 0;
+    font-style: italic;
+}
+
+.zones-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.zone-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #f9f9f9;
+    transition: background 0.3s;
+}
+
+.zone-item:hover {
+    background: #f0f0f0;
+}
+
+.zone-info h4 {
+    margin: 0 0 5px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.zone-info p {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+}
+
+.zone-actions {
+    display: flex;
+    gap: 8px;
+}
+
+@media (max-width: 1024px) {
+    .map-editor-section {
+        grid-template-columns: 1fr;
+    }
+
+    .zones-list {
+        max-height: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .control-group {
+        flex-direction: column;
+    }
+
+    .btn-secondary,
+    .btn-success,
+    .btn-danger {
+        width: 100%;
+    }
+}

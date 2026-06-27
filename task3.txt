@@ -1,0 +1,2 @@
+Bây giờ khi ai trả về kết quả, chỉ nhận image và lưu, không nhận và xử lý plate_text nứa, bỏ các logic liên quan đến plate_text
+tại front end, ở trang manamentaccess, bỏ các cột plate_text

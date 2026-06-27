@@ -19,6 +19,7 @@ import Setting from './components/Setting/Setting';
 import Help from './components/Help/Help';
 import LoginForm from './components/Auth/Login';
 import RegisterForm from './components/Auth/Register';
+import SignOut from './components/Auth/SignOut';
 import ManagementAccess from './components/ManagementAccess/ManagementAcess';
 import { DndProvider } from 'react-dnd';
 import DndWrapper from './components/DndWraper';
@@ -29,8 +30,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 const AppRoutes = ({ navActive, handleToggle }) => {
     const location = useLocation();
-    // Ẩn Navigation và Topbar nếu đang ở trang login hoặc register
-    const hideNav = location.pathname === '/login' || location.pathname === '/register';
+    // Ẩn Navigation và Topbar nếu đang ở trang login, register hoặc sign-out
+    const hideNav = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/sign-out';
 
     return (
         <>
@@ -55,6 +56,7 @@ const App = () => {
                     <Routers>
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
+                    <Route path="/sign-out" element={<SignOut />} />
                     <Route path="/" element={<PrivateRoute><AppRoutes navActive={navActive} handleToggle={handleToggle} /></PrivateRoute>}>
                             <Route path="dashboard" element={<Dashboard />} />
                             <Route path="empty-parking" element={<EmptyParking />} />
